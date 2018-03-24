@@ -102,7 +102,3 @@ class JerkAi {
 
 module.exports = JerkAi
 
-if(require.main === module) {
-    let ai = new JerkAi();
-    console.log(ai.decide("X", 1, [[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]))
-}
