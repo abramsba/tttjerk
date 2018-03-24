@@ -8,5 +8,8 @@
   "dependencies": {},
   "devDependencies": {
     "tiktaktoe": "file:../tiktaktoe"
+  },
+  "scripts": {
+    "aitest": "node test.js"
   }
 }
