@@ -1,0 +1,12 @@
+{
+  "name": "tttjerk",
+  "version": "1.0.0",
+  "description": "Impossible to beat AI",
+  "main": "index.js",
+  "author": "Bryan",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "tiktaktoe": "file:../tiktaktoe"
+  }
+}
