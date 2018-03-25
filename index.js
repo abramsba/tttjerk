@@ -2,7 +2,6 @@
 const rx = /(X..\n.X.\n..X|..X\n.X.\nX|XXX|\nXXX|\n\nXXX|X..\nX..\nX..|.X.\n.X.\n.X.|..X\n..X\n..X)/
 const ro = /(O..\n.O.\n..O|..O\n.O.\nO|OOO|\nOOO|\n\nOOO|O..\nO..\nO..|.O.\n.O.\n.O.|..O\n..O\n..O)/
 
-
 // Uses http://en.wikipedia.org/wiki/Minimax to make sure you never win
 class JerkAi {
     constructor() {
@@ -16,10 +15,11 @@ class JerkAi {
             this.me = symbol
             this.enemy = symbol=="X"?"O":"X"
         }
-        //console.log(step)
+        if ( step == 1 )
+            return [Math.floor(Math.random()*3), Math.floor(Math.random()*3)]
+
         this.step = step
         let mm = this.minimax(step, board, symbol)
-        //console.log(mm)
         return this.intpos(mm)
     }
 
@@ -39,7 +39,6 @@ class JerkAi {
         let flat   = [].concat.apply([], board)
         let values = flat.map((c, i) => c==" "?""+i:c)
         let avail  = values.filter(v => v.match(/[0-8]/))
-        //console.log(board)
         if ( this.winning(board, this.me) )
             return 10
         else if ( this.winning(board, this.enemy) )
@@ -52,7 +51,6 @@ class JerkAi {
         let scores = []
         avail.forEach(move => {
             flat[parseInt(move)] = symbol
-            //console.log(symbol, depth, move)
             scores.push(
                     this.minimax(
                         depth+1,
@@ -66,8 +64,6 @@ class JerkAi {
             let max_score = Math.max.apply(Math, scores)
             let max_index = scores.indexOf(max_score)
             let ava = avail[max_index]
-            //choice = avail[max_index]
-            //console.log(depth, "max", max_index, scores, this.intpos(max_index))
             if ( depth == this.step )
                 return ava
             return scores[max_index]
@@ -76,12 +72,10 @@ class JerkAi {
             let min_score = Math.min.apply(Math, scores)
             let min_index = scores.indexOf(min_score)
             let ava = avail[min_index]
-            //console.log(depth, "min", this.intpos(min_index))
             if ( depth == this.step )
                 return ava
             return scores[min_index]
         }
-        console.log(avail)
     }
 
     winning(board, symbol) {
